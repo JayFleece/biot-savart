@@ -469,4 +469,13 @@ def create_Bz_circle(fname, numSegments, radius, spacing, current, center):
         f.write(line)
     f.close()
 
+create_B_z_rectangle("rectangle.txt",p0=[.4,.4,.5,1],H=.2,DD=.2)
+coil_data = parse_coil("rectangle.txt")
+coil_sliced = slice_coil(coil_data,.05)
+box_size = [1,1,1]
+start_point =  [0,0,0]
+vol_resolution = .05
+target_volume = produce_target_volume(coil_sliced,box_size,start_point,vol_resolution)
+
+plot_fields(target_volume,box_size,start_point,vol_resolution,which_plane='z',level=0,num_contours=50)
 
